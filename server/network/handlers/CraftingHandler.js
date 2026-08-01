@@ -58,6 +58,16 @@ export default class CraftingHandler {
       return;
     }
 
+    const requiredKnowledge = {
+      cultivate_emberroot: 'knowledge:bramblethorn_ecology',
+      warming_tonic: 'knowledge:emberroot_cultivation',
+      east_road_depot_charter: 'knowledge:deepwood_routes',
+    }[recipeId];
+    if (this.gameServer.earthbornEnabled && requiredKnowledge && !pc?.earthborn?.knowledge?.includes(requiredKnowledge)) {
+      player.emit(MSG.CRAFT_RESULT, { success: false, message: 'Required knowledge has not been discovered' });
+      return;
+    }
+
     // Verify player is near the required station (hand-craft skips this)
     const playerPos = entity.getComponent(PositionComponent);
     if (recipe.station !== 'hand') {
@@ -141,6 +151,7 @@ export default class CraftingHandler {
         player.id, recipeId, recipe.results, this.gameServer.entityManager
       );
     }
+    this.gameServer.earthbornProgression?.onRecipeCrafted(player, entity, recipeId);
 
     // Send updates
     player.emit(MSG.INVENTORY_UPDATE, { slots: inv.serialize().slots });

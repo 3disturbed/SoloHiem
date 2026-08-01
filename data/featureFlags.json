@@ -1,0 +1,11 @@
+{
+  "earthborn": {
+    "branding": true,
+    "domainEvents": true,
+    "circularProgression": true,
+    "itemProvenance": false,
+    "mastery": false,
+    "apprentices": false,
+    "sharedWorldAuthority": false
+  }
+}

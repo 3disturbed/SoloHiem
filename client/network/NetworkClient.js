@@ -147,6 +147,9 @@ export default class NetworkClient {
     this.socket.on(MSG.SAVE_STATUS, (data) => {
       if (this.onSaveStatus) this.onSaveStatus(data);
     });
+    this.socket.on(MSG.EARTHBORN_STATE, (data) => {
+      if (this.onEarthbornState) this.onEarthbornState(data);
+    });
 
     this.socket.on(MSG.DAMAGE, (data) => {
       if (this.onDamage) this.onDamage(data);

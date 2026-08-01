@@ -1,0 +1,7 @@
+{
+  "knowledge": [
+    { "id": "knowledge:bramblethorn_ecology", "name": "Bramblethorn Ecology", "source": "hero.bramblethorn", "unlocks": ["seed:emberroot", "recipe:warming_tonic"] },
+    { "id": "knowledge:deepwood_routes", "name": "Surveyed Deepwood Routes", "source": "wild.deepwood_boundary", "unlocks": ["project:east_road_depot"] },
+    { "id": "knowledge:emberroot_cultivation", "name": "Emberroot Cultivation", "source": "hearth.first_emberroot_harvest", "unlocks": ["crop:emberroot_renewable"] }
+  ]
+}

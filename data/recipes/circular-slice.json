@@ -1,0 +1,8 @@
+{
+  "recipes": [
+    { "id": "recipe:expedition_rations", "pillar": "hearth", "inputs": [{ "itemId": "cooked_meat", "count": 2 }, { "itemId": "berries", "count": 3 }], "capability": "sustenance:expedition_rations" },
+    { "id": "recipe:cultivate_emberroot", "pillar": "hearth", "knowledge": "knowledge:bramblethorn_ecology", "inputs": [{ "itemId": "emberroot_seed", "count": 1 }], "capability": "crop:emberroot_renewable" },
+    { "id": "recipe:warming_tonic", "pillar": "hearth", "knowledge": "knowledge:emberroot_cultivation", "inputs": [{ "itemId": "berries", "count": 2 }, { "itemId": "mushroom", "count": 2 }, { "itemId": "emberroot", "count": 1 }], "capability": "resistance:warming_tonic" },
+    { "id": "project:east_road_depot", "pillar": "crown", "knowledge": "knowledge:deepwood_routes", "inputs": [{ "itemId": "oak_plank", "count": 20 }, { "itemId": "stone", "count": 30 }], "capability": "infrastructure:east_road_depot" }
+  ]
+}

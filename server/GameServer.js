@@ -73,6 +73,8 @@ import ProjectileComponent from './ecs/components/ProjectileComponent.js';
 import DamageZoneComponent from './ecs/components/DamageZoneComponent.js';
 import LandPlotHandler from './network/handlers/LandPlotHandler.js';
 import { LAND_PLOTS } from '../shared/LandPlotTypes.js';
+import EarthbornProgressionService from './earthborn/EarthbornProgressionService.js';
+import { createEarthbornState } from '../shared/earthborn/ProgressionState.js';
 
 export default class GameServer {
   constructor(io, options = {}) {
@@ -87,6 +89,7 @@ export default class GameServer {
       caveDensityMultiplier: options.caveDensityMultiplier ?? 1.0,
       waterAmountMultiplier: options.waterAmountMultiplier ?? 1.0,
     };
+    this.earthbornEnabled = options.earthbornEnabled ?? true;
     
     // Survival mode settings
     this.hungerEnabled = this.mode === 'survival' && (options.hungerEnabled ?? true);
@@ -112,6 +115,7 @@ export default class GameServer {
 
     // Persistence
     this.playerRepo = new PlayerRepository(this.mode);
+    this.earthbornProgression = new EarthbornProgressionService(this);
     this.autoSaveInterval = null;
 
     this.registerHandlers();
@@ -479,6 +483,7 @@ export default class GameServer {
       }
       // Reset summoning shrine when boss dies
       if (entity.isBoss) {
+        this.earthbornProgression.onBossDefeated(entity, entityManager);
         const altars = entityManager.getByTag('station');
         for (const altar of altars) {
           const sc = altar.getComponent(CraftingStationComponent);
@@ -948,6 +953,7 @@ export default class GameServer {
       petCodex: joinPc ? (joinPc.petCodex || []) : [],
       tamerLevel: joinPc ? joinPc.tamerLevel : 1,
       tamerXp: joinPc ? joinPc.tamerXp : 0,
+      earthborn: joinPc ? joinPc.earthborn : createEarthbornState(),
     });
     playerConn.emit(MSG.SAVE_STATUS, {
       savedAt: saveData?.savedAt || null,
@@ -985,6 +991,7 @@ export default class GameServer {
     if (statsComp) playerConn.emit(MSG.PLAYER_STATS, statsComp.serialize());
     if (invComp) playerConn.emit(MSG.INVENTORY_UPDATE, { slots: invComp.serialize().slots });
     if (equipComp) playerConn.emit(MSG.EQUIPMENT_UPDATE, equipComp.serialize());
+    this.earthbornProgression.sync(playerConn, entity);
 
     // Initialize and send skills
     const skillComp = entity.getComponent(SkillComponent);
@@ -1082,7 +1089,7 @@ export default class GameServer {
     const pc = entity.getComponent(PlayerComponent);
 
     const data = {
-      version: 2,
+      version: 3,
       id: playerConn.id,
       name: playerConn.name,
       color: playerConn.color,
@@ -1109,6 +1116,7 @@ export default class GameServer {
       petCodex: pc ? (pc.petCodex || []) : [],
       tamerLevel: pc ? pc.tamerLevel : 1,
       tamerXp: pc ? pc.tamerXp : 0,
+      earthborn: pc ? pc.earthborn : createEarthbornState(),
     };
 
     const saved = await this.playerRepo.save(playerConn.id, data);
@@ -1200,6 +1208,7 @@ export default class GameServer {
     {
       const pc = entity.getComponent(PlayerComponent);
       if (pc) {
+        pc.earthborn = createEarthbornState(saveData.earthborn);
         pc.tamerLevel = Math.max(1, Math.min(20, Number(saveData.tamerLevel) || 1));
         pc.tamerXp = Math.max(0, Number(saveData.tamerXp) || 0);
         if (saveData.petCodex) {

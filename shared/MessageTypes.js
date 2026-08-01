@@ -149,6 +149,9 @@ export const MSG = {
   TIME_UPDATE:        'world:time',
   WEATHER_UPDATE:     'world:weather',
 
+  // Earthborn civilisation progression
+  EARTHBORN_STATE:    'earthborn:state',
+
   // Pet system
   PET_CAPTURE:        'pet:capture',
   PET_CAPTURE_RESULT: 'pet:capture:result',

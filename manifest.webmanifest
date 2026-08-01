@@ -1,7 +1,7 @@
 {
-  "name": "DwarvenTamers",
-  "short_name": "DwarvenTamers",
-  "description": "A single-player survival crafting adventure that runs entirely in your browser.",
+  "name": "Earthborn of Ymir",
+  "short_name": "Earthborn",
+  "description": "A dwarven civilisation simulator in one continuous world.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

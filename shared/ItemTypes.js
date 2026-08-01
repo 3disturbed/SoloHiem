@@ -1309,6 +1309,32 @@ export const ITEM_DB = {
     effect: { healAmount: 45 },
     description: 'Rich rabbit stew. Restores 45 HP.',
   },
+  expedition_rations: {
+    id: 'expedition_rations', name: 'Expedition Rations', type: 'consumable', stackable: true, maxStack: 20,
+    effect: { healAmount: 35, expeditionDuration: 1 },
+    description: 'Durable meadow fare that sustains a Deepwood expedition.',
+  },
+  warming_tonic: {
+    id: 'warming_tonic', name: 'Warming Tonic', type: 'consumable', stackable: true, maxStack: 10,
+    effect: { healAmount: 15, resistanceTag: 'deepwood_chill' },
+    description: 'Bramble resin tonic that counters the Deepwood chill.',
+  },
+  emberroot_seed: {
+    id: 'emberroot_seed', name: 'Emberroot Seed', type: 'material', stackable: true, maxStack: 20,
+    description: 'A dungeon-recovered seed. Cultivation can make its warmth renewable.',
+  },
+  emberroot: {
+    id: 'emberroot', name: 'Emberroot', type: 'material', stackable: true, maxStack: 50,
+    description: 'A cultivated warming root that makes Deepwood preparations renewable.',
+  },
+  bramble_resin: {
+    id: 'bramble_resin', name: 'Bramble Resin', type: 'material', stackable: true, maxStack: 50,
+    description: 'Resin recovered from Bramblethorn and used in warming preparations.',
+  },
+  east_road_depot_charter: {
+    id: 'east_road_depot_charter', name: 'East Road Depot Charter', type: 'material', stackable: false, maxStack: 1,
+    description: 'Records the materials and civic commitment establishing an eastern supply depot.',
+  },
 
   // --- Bombs ---
   bomb: {

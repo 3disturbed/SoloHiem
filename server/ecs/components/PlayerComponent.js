@@ -1,4 +1,5 @@
 import Component from '../Component.js';
+import { createEarthbornState } from '../../../shared/earthborn/ProgressionState.js';
 
 export default class PlayerComponent extends Component {
   constructor(playerId, socketId) {
@@ -17,6 +18,7 @@ export default class PlayerComponent extends Component {
     this.petTeam = [null, null, null]; // codex indices (int or null)
     this.tamerLevel = 1;
     this.tamerXp = 0;
+    this.earthborn = createEarthbornState();
     this.activeBattle = null; // reference to active PetBattle instance
   }
 }

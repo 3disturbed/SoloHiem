@@ -1,0 +1,10 @@
+{
+  "masteryBudget": { "activeSpecialisationSlots": 3, "apprenticeRoutineCeiling": 0.75 },
+  "professions": [
+    { "id": "profession:prospector", "pillar": "wild", "specialisations": ["surveyor", "ore_reader", "cartographer"] },
+    { "id": "profession:hearthkeeper", "pillar": "hearth", "specialisations": ["grower", "brewer", "chef"] },
+    { "id": "profession:smith", "pillar": "hearth", "specialisations": ["weaponsmith", "armoursmith", "toolsmith"] },
+    { "id": "profession:logistician", "pillar": "crown", "specialisations": ["road_engineer", "quartermaster", "warehouse_keeper"] },
+    { "id": "profession:pathfinder", "pillar": "hero", "specialisations": ["delver", "warden", "relic_scholar"] }
+  ]
+}

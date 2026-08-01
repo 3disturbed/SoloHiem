@@ -1,0 +1,9 @@
+{
+  "name": "earthborn-of-ymir",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/test-earthborn-domain.js && node tests/test-static-build.js"
+  }
+}

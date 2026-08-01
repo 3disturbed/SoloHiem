@@ -133,6 +133,7 @@ export default class QuestHandler {
     }
 
     player.emit(MSG.QUEST_COMPLETE, { questId, rewards: questDef.rewards });
+    this.gameServer.earthbornProgression?.onQuestCompleted(player, entity, questId);
   }
 
   _sendProgress(player, questId, questComp) {

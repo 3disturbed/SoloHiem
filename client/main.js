@@ -64,7 +64,7 @@ const PERFORMANCE_PRESETS = {
 };
 const DEFAULT_PERFORMANCE_PRESET = 'meh';
 
-// DwarvenTamers has one local character and loads directly without an account screen.
+// The compatibility host has one local character and loads without an account screen.
 initializePwa();
 initializeOnboarding();
 initializeSaveManager();

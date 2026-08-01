@@ -1,0 +1,4 @@
+node_modules/
+saves/players/
+.DS_Store
+npm-debug.log*

@@ -80,6 +80,8 @@ export default class Game {
     this.localPlayer = null;
     this.remotePlayers = new Map(); // id -> {name, color, x, y, hp, maxHp, facing}
     this.lastSavedAt = null;
+    this.earthbornState = null;
+    this.darkForestReadiness = null;
     this.enemies = new Map(); // id -> entity state from server
     this.resources = new Map(); // id -> resource entity state
     this.stations = new Map(); // id -> station entity state (AOI-local)
@@ -884,6 +886,13 @@ export default class Game {
     };
     this.network.onSaveStatus = (data) => {
       this.lastSavedAt = data?.savedAt || this.lastSavedAt;
+    };
+    this.network.onEarthbornState = (data) => {
+      this.earthbornState = data.state || this.earthbornState;
+      this.darkForestReadiness = data.readiness || this.darkForestReadiness;
+      if (data.notice && this.localPlayer) {
+        this.damageNumbers.add(this.localPlayer.x, this.localPlayer.y - 48, data.notice, false, '#d6b96f');
+      }
     };
   }
 
@@ -2722,6 +2731,17 @@ export default class Game {
     const w = r.logicalWidth;
     const h = r.logicalHeight;
     const touchMode = this.input.isTouchDevice();
+    if (this.darkForestReadiness) {
+      const report = this.darkForestReadiness;
+      const color = report.score >= 85 ? '#7ee2a8' : report.score >= 65 ? '#e8d48b' : '#e08365';
+      r.drawText(
+        `DEEPWOOD ${report.bandLabel} · ${report.score}%`,
+        w / 2, touchMode ? 82 : 18, color, touchMode ? 8 : 10, 'center',
+      );
+      if (!touchMode && report.deficiencies?.length) {
+        r.drawText(`Next: ${report.deficiencies[0].label}`, w / 2, 32, '#9aa0a6', 9, 'center');
+      }
+    }
     if (!touchMode) {
       const status = this.localPlayer ? 'Adventure ready' : 'Preparing world…';
       const statusColor = this.localPlayer ? '#e8d48b' : '#95a5a6';

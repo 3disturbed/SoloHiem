@@ -1,6 +1,14 @@
 import { ITEM_DB } from '../../shared/ItemTypes.js';
 
 const ITEM_IDS = Object.keys(ITEM_DB);
+const EARTHBORN_SPRITE_FALLBACKS = {
+  expedition_rations: 'cooked_meat',
+  warming_tonic: 'berry_juice',
+  emberroot_seed: 'berries',
+  emberroot: 'mushroom',
+  bramble_resin: 'resin',
+  east_road_depot_charter: 'oak_plank',
+};
 
 class ItemSprites {
   constructor() {
@@ -26,7 +34,8 @@ class ItemSprites {
           count++;
           if (count >= total) { this.loaded = true; resolve(); }
         };
-        img.src = new URL(`../../tileArt/items/${id}.png`, import.meta.url).href;
+        const spriteId = EARTHBORN_SPRITE_FALLBACKS[id] || id;
+        img.src = new URL(`../../tileArt/items/${spriteId}.png`, import.meta.url).href;
       }
     });
   }

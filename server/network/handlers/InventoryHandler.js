@@ -286,5 +286,6 @@ export default class InventoryHandler {
     if (inventory) player.emit(MSG.INVENTORY_UPDATE, { slots: inventory.serialize().slots });
     if (equipment) player.emit(MSG.EQUIPMENT_UPDATE, equipment.serialize());
     if (stats) player.emit(MSG.PLAYER_STATS, stats.serialize());
+    this.gameServer.earthbornProgression?.sync(player, entity);
   }
 }

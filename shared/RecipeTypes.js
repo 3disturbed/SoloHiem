@@ -1734,6 +1734,30 @@ export const RECIPE_DB = {
     ingredients: [{ itemId: 'cooked_meat', count: 2 }, { itemId: 'mushroom', count: 2 }, { itemId: 'berries', count: 3 }],
     results: [{ itemId: 'pet_feast', count: 1 }],
   },
+  expedition_rations: {
+    id: 'expedition_rations', name: 'Expedition Rations',
+    station: 'cooking_fire', stationLevel: 1,
+    ingredients: [{ itemId: 'cooked_meat', count: 2 }, { itemId: 'berries', count: 3 }],
+    results: [{ itemId: 'expedition_rations', count: 2 }],
+  },
+  cultivate_emberroot: {
+    id: 'cultivate_emberroot', name: 'Cultivate Emberroot Bed',
+    station: 'workbench', stationLevel: 1,
+    ingredients: [{ itemId: 'emberroot_seed', count: 1 }, { itemId: 'berries', count: 3 }, { itemId: 'mushroom', count: 2 }],
+    results: [{ itemId: 'emberroot_seed', count: 1 }, { itemId: 'emberroot', count: 3 }],
+  },
+  warming_tonic: {
+    id: 'warming_tonic', name: 'Warming Tonic',
+    station: 'cooking_fire', stationLevel: 2,
+    ingredients: [{ itemId: 'berries', count: 2 }, { itemId: 'mushroom', count: 2 }, { itemId: 'emberroot', count: 1 }],
+    results: [{ itemId: 'warming_tonic', count: 1 }],
+  },
+  east_road_depot_charter: {
+    id: 'east_road_depot_charter', name: 'Establish East Road Depot',
+    station: 'workbench', stationLevel: 2,
+    ingredients: [{ itemId: 'oak_plank', count: 20 }, { itemId: 'stone', count: 30 }],
+    results: [{ itemId: 'east_road_depot_charter', count: 1 }],
+  },
 };
 
 function generateGemCuttingRecipes() {
